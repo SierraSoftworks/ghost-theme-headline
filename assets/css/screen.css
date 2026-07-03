@@ -922,8 +922,8 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     display: none;
 }
 
-.gh-project-links .gh-button-download {
-    margin-top: 0;
+.gh-project-share {
+    margin-top: 12px;
 }
 
 .gh-project-sidebar .gh-article-meta {
@@ -992,6 +992,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         row-gap: 12px;
     }
 
+    .gh-project-sidebar .gh-project-share,
     .gh-project-sidebar .gh-article-meta {
         align-self: center;
         margin-top: 0;
