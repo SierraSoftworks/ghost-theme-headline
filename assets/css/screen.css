@@ -916,6 +916,16 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     flex-shrink: 0;
 }
 
+/* Links without a configured URL stay hidden; the display rules
+ * above would otherwise override the hidden attribute. */
+.gh-project-links [hidden] {
+    display: none;
+}
+
+.gh-project-links .gh-button-download {
+    margin-top: 0;
+}
+
 @media (max-width: 1199px) {
     .gh-article-sidebar {
         position: static;
