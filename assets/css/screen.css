@@ -53,6 +53,13 @@ body:is(.is-head-transparent, .is-head-brand, .is-head-dark) .gh-head-logo img +
     opacity: 0;
 }
 
+/* Fixing up quirks in the base Ghost theme */
+
+.gh-content table:not(.gist table) {
+    white-space: unset;
+    background: transparent;
+}
+
 /* Styles specific to grid style sections */
 
 .gh-topic-grid + .gh-topic-grid {
