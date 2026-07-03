@@ -926,6 +926,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     margin-top: 0;
 }
 
+.gh-project-sidebar .gh-article-meta {
+    margin-top: 16px;
+}
+
 @media (max-width: 1199px) {
     .gh-article-sidebar {
         position: static;
@@ -986,5 +990,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         flex-wrap: wrap;
         column-gap: 20px;
         row-gap: 12px;
+    }
+
+    .gh-project-sidebar .gh-article-meta {
+        align-self: center;
+        margin-top: 0;
     }
 }
