@@ -20,7 +20,8 @@ figcaption {
     font-size: 1.3rem;
 }
 
-.has-full-image figcaption {
+.has-full-image figcaption,
+.has-wide-image figcaption {
     padding: 0 16px;
 }
 
@@ -350,7 +351,8 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     font-size: 1.9rem;
 }
 
-.has-full-image .gh-article-excerpt {
+.has-full-image .gh-article-excerpt,
+.has-wide-image .gh-article-excerpt {
     margin-bottom: -8px;
 }
 
@@ -361,6 +363,18 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 
 .has-wide-image .gh-article-image {
     grid-column: wide-start / wide-end;
+}
+
+.post-template .gh-cover {
+    min-height: calc(var(--cover-height) / 3);
+}
+
+.post-template.has-wide-image .gh-cover {
+    min-height: calc(var(--cover-height) / 2);
+}
+
+.post-template.has-full-image .gh-cover {
+    min-height: var(--cover-height);
 }
 
 .gh-article-sidebar {
@@ -885,7 +899,8 @@ body:not(.home-template) .gh-topic-grid .gh-card {
         font-weight: 500;
     }
 
-    .has-full-image .gh-article-excerpt {
+    .has-full-image .gh-article-excerpt,
+    .has-wide-image .gh-article-excerpt {
         margin-top: 36px;
         font-size: 2.4rem;
     }
