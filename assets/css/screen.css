@@ -612,8 +612,37 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     color: inherit;
 }
 
+.home-template .gh-cover {
+    align-items: flex-end;
+}
+
+.home-template .gh-cover-content {
+    align-items: flex-start;
+    max-width: 1200px;
+    text-align: left;
+}
+
 .home-template .gh-cover-title {
     text-transform: none;
+}
+
+.gh-cover-tags {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: var(--color-white);
+}
+
+.gh-cover-tags .gh-article-tag {
+    margin-bottom: 0;
+}
+
+.gh-cover-tags-sep {
+    width: 3px;
+    height: 3px;
+    background-color: currentColor;
+    border-radius: 50%;
 }
 
 .gh-cover-description {
