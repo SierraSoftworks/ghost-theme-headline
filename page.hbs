@@ -1,20 +1,48 @@
 {{!< default}}
 
 {{#post}}
+    {{#match @page.show_title_and_feature_image}}
+        {{#if feature_image}}
+            <section class="gh-cover gh-cover-hero gh-outer">
+                <img
+                    class="gh-cover-image"
+                    srcset="{{img_url feature_image size="s"}} 300w,
+                            {{img_url feature_image size="m"}} 720w,
+                            {{img_url feature_image size="l"}} 960w,
+                            {{img_url feature_image size="xl"}} 1200w,
+                            {{img_url feature_image size="xxl"}} 2000w"
+                    sizes="100vw"
+                    src="{{img_url feature_image size="xl"}}"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                >
+
+                <div class="gh-cover-content">
+                    <h1 class="gh-cover-title">{{title}}</h1>
+
+                    {{#if custom_excerpt}}
+                        <p class="gh-cover-description">{{custom_excerpt}}</p>
+                    {{/if}}
+                </div>
+            </section>
+        {{/if}}
+    {{/match}}
+{{/post}}
+
+{{#post}}
 
 <main class="gh-main">
     <article class="gh-article {{post_class}}">
 
         {{#match @page.show_title_and_feature_image}}
-            <header class="gh-article-header gh-canvas">
-                <h1 class="gh-article-title">{{title}}</h1>
+            {{#unless feature_image}}
+                <header class="gh-article-header gh-canvas">
+                    <h1 class="gh-article-title">{{title}}</h1>
 
-                {{#if custom_excerpt}}
-                    <p class="gh-article-excerpt">{{custom_excerpt}}</p>
-                {{/if}}
-
-                {{> "feature-image"}}
-            </header>
+                    {{#if custom_excerpt}}
+                        <p class="gh-article-excerpt">{{custom_excerpt}}</p>
+                    {{/if}}
+                </header>
+            {{/unless}}
         {{/match}}
 
         <section class="gh-content gh-canvas">
@@ -25,3 +53,5 @@
 </main>
 
 {{/post}}
+
+{{#contentFor "body_class"}}{{#post}}{{#match @page.show_title_and_feature_image}}{{#if feature_image}} is-head-transparent{{/if}}{{/match}}{{/post}}{{/contentFor}}
