@@ -34,7 +34,7 @@
                 {{#match pagination.page 2}}
                     {{#get "posts" include="authors" limit=@config.posts_per_page as |recent|}}
                         {{#foreach recent}}
-                            {{> "loop-grid"}}
+                            {{> "loop-grid" has_large_post=false}}
                         {{/foreach}}
                     {{/get}}
                 {{/match}}
