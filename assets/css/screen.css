@@ -618,7 +618,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 
 .home-template .gh-cover-content {
     align-items: flex-start;
-    max-width: 1200px;
+    max-width: var(--container-width, 1200px);
     text-align: left;
 }
 
