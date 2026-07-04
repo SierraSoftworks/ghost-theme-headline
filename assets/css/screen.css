@@ -607,6 +607,15 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     text-transform: none;
 }
 
+/* Latest-post cover on the home page */
+.gh-cover-title a {
+    color: inherit;
+}
+
+.home-template .gh-cover-title {
+    text-transform: none;
+}
+
 .gh-cover-description {
     margin-top: 20px;
     font-size: 1.9rem;
