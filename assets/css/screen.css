@@ -592,7 +592,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 }
 
 .gh-cover-title {
-    font-size: 7.2rem;
+    font-size: 3rem;
     color: var(--color-white);
     text-transform: uppercase;
     word-break: break-word;
