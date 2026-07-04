@@ -1,0 +1,67 @@
+==================================================================
+https://keybase.io/spartan563
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://sierrasoftworks.com
+  * I am spartan563 (https://keybase.io/spartan563) on keybase.
+  * I have a public key with fingerprint 8C4F FBEC 8CE2 C93F E838  DE7D B808 C16A 3F74 B2C4
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "8c4ffbec8ce2c93fe838de7db808c16a3f74b2c4",
+            "host": "keybase.io",
+            "key_id": "b808c16a3f74b2c4",
+            "kid": "0101e642d26cab78988cedf83ff99e15f6b054ea320e72d4bb8cf8309e184d004e640a",
+            "uid": "d769d3de2571b624f4ca0f3f71107b19",
+            "username": "spartan563"
+        },
+        "service": {
+            "hostname": "sierrasoftworks.com",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1428514731,
+    "expire_in": 157680000,
+    "prev": "1b14b02e3070e7bcecbec91c8cd01a2c9ea73731702c05f5c7cce135cf3312e0",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.8
+Comment: https://keybase.io/crypto
+
+yMIiAnicbZJbSBRRGMfXW5SkGNJNfKiJDGSxc+ayM7NEgUG1pUUPbmWXdc5ltmnb
+mXVmdktsDcWgwke7QDcoutFGpYEFFRUl3QgqyciuUA8V0YJgInY5s+Rb5+Vwvu//
+/b7zXe6VFPiK8+KofFXiRfJT3uM7K5O+hvnRC60cskgLF2zlYjR36YYZpXbCNkyX
+C3IKFnUdUaxgymNV0KkiKITKBClAwTCgCbosIh6LnJ/bajleBMMgzaE1hsVs7BEx
+CLP+Rx/LOQAEkAZEnvABrCFZURWWiuiKoOuqSqGkBxCQRKoJPKAyT0SEFMy8gPkU
+kQAgsmCgMVwyhyNyQCUCobwkQxTgRV3EGtBZVgiBjKDqCR1qm1qcMrWT0GxXM6WA
+wKX9HLOnDEy9Jni1TGgMatuaY+nuDsuOOTXYijNIwrZcC1vbmWCr6yacoAdwWxJe
+xA6KIv9YEWSYhDWURaSo7RiWyQUhU2LX8OBQ5BUJirIA/RzdmTBsGjE8hSQHFMCO
+l4emGBIiKCLAUwHIrA0IU8xmokI2FgKgxiZDNVlgGBnwGEi6hGWMKRQkrAsC5Cng
+vOqaTYsLSuybWjRXV9TU3KRNufTd25sKfXnFvklF+d5K+IqnlE0sytlrk33Hlzp1
+i9pC0YpfP9oTnx9ta82vm3fv/Pim9oGG6mdjfUZmYLBn+tN4Jtx9bPLVw2d+z62+
++G3Z/qr+TEd3esFweHfj/abVnytvLF44XFeazYsXOeVC4/qhPen0mlAXqv9gNh0d
+XeFcvBlKk7UHR2avFd6EXx45t5er7Pp6hCfXwzPqh15teTfz1p+qj51Lnm3LvL7W
+GeqY8frJ9+5346PlXy9Pf1vR3rZr8MCCDQ8O0ZklD59oJ3/8bM70+rPZE2G8PNZ/
+a/xK/7renmmXj34Zed/Ud3cobTwcO7VlzFD31V9quz7nce17JTtr6sZ4qrbzTYdA
+jj8/XVogDRfa9uYBfxnp+wvruzPb
+=oshW
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/spartan563
+
+==================================================================
