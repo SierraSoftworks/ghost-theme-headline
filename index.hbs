@@ -1,11 +1,33 @@
 {{!< default}}
 
+{{#if @site.cover_image}}
+    <section class="gh-cover gh-cover-hero gh-outer">
+        <img
+            class="gh-cover-image"
+            srcset="{{img_url @site.cover_image size="s"}} 300w,
+                    {{img_url @site.cover_image size="m"}} 720w,
+                    {{img_url @site.cover_image size="l"}} 960w,
+                    {{img_url @site.cover_image size="xl"}} 1200w,
+                    {{img_url @site.cover_image size="xxl"}} 2000w"
+            sizes="100vw"
+            src="{{img_url @site.cover_image size="xl"}}"
+            alt="{{@site.title}}"
+        >
+
+        <div class="gh-cover-content">
+            <h1 class="gh-cover-title">{{t "Latest"}}</h1>
+        </div>
+    </section>
+{{/if}}
+
 <main class="gh-main gh-outer">
     <div class="gh-inner">
 
-        <section class="gh-pagehead">
-            <h1 class="gh-pagehead-title">{{t "Latest"}}</h1>
-        </section>
+        {{#unless @site.cover_image}}
+            <section class="gh-pagehead">
+                <h1 class="gh-pagehead-title">{{t "Latest"}}</h1>
+            </section>
+        {{/unless}}
 
         <div class="gh-topic gh-topic-grid">
             <div class="gh-topic-content gh-feed">
@@ -24,3 +46,5 @@
 
     </div>
 </main>
+
+{{#contentFor "body_class"}}{{#if @site.cover_image}} is-head-transparent{{/if}}{{/contentFor}}

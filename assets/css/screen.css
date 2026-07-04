@@ -607,22 +607,23 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     text-transform: none;
 }
 
-/* Latest-post cover on the home page */
+/* Cover hero treatment (home, pages, and collection indexes):
+ * content anchored to the lower left of the container width. */
 .gh-cover-title a {
     color: inherit;
 }
 
-.home-template .gh-cover {
+.gh-cover-hero {
     align-items: flex-end;
 }
 
-.home-template .gh-cover-content {
+.gh-cover-hero .gh-cover-content {
     align-items: flex-start;
     max-width: var(--container-width, 1200px);
     text-align: left;
 }
 
-.home-template .gh-cover-title {
+.gh-cover-hero .gh-cover-title {
     text-transform: none;
 }
 
