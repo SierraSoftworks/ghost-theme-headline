@@ -582,7 +582,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     position: sticky;
     bottom: 80px;
     align-items: flex-start;
-    max-width: 1200px;
+    max-width: var(--content-width, 1200px);
     margin-bottom: 64px;
     text-align: left;
 }
