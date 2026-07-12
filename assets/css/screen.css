@@ -8,6 +8,9 @@
     --color-primary-text: var(--color-darker-gray);
     --h1-size: 4.4rem;
     --footer-spacing: 120px;
+
+    --var-container-width: 800px;
+    --var-content-width: 600px;
 }
 
 @media (max-width: 767px) {
@@ -52,6 +55,26 @@ body:is(.is-head-transparent, .is-head-brand, .is-head-dark) .gh-head-logo img +
 .is-head-transparent .gh-head-logo img:first-of-type:not(:only-child) {
     display: block;
     opacity: 0;
+}
+
+/* Enabling parallax effects within the header */
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+body {
+    perspective: 1px;
+}
+
+.gh-site {
+    transform-style: preserve-3d;
+}
+
+.gh-main {
+    background-color: var(--color-white);
 }
 
 /* Fixing up quirks in the base Ghost theme */
@@ -366,15 +389,19 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 }
 
 .post-template .gh-cover {
-    min-height: calc(var(--cover-height) / 3);
-}
-
-.post-template.has-wide-image .gh-cover {
-    min-height: calc(var(--cover-height) / 2);
-}
-
-.post-template.has-full-image .gh-cover {
     min-height: var(--cover-height);
+}
+
+.post-template {
+    --cover-height: 55vh;
+}
+
+.post-template.has-wide-image {
+    --cover-height: 40vh;
+}
+
+.post-template.has-full-image {
+    --cover-height: 100vh;
 }
 
 .gh-article-sidebar {
@@ -528,22 +555,22 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 /* Full screen cover */
 
 .gh-cover {
-    --cover-height: 50vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: -16px;
     background-color: rgba(0, 0, 0, 0.4);
+    transform-style: preserve-3d;
+}
+
+.gh-cover-image {
+    transform: translateY(-22.5%) translateZ(-0.5px) scale(2);
+    z-index: -10;
 }
 
 .post-template .gh-cover {
-    --cover-height: 100vh;
-
     align-items: flex-end;
     padding-top: 120px;
     padding-bottom: 0;
-    margin-bottom: -56px;
     background-color: transparent;
 }
 
@@ -562,11 +589,10 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 
 .post-template .gh-cover-image {
     transition: transform 1.5s ease;
-    transform: scale(1);
 }
 
 .post-template .gh-cover.loading .gh-cover-image {
-    transform: scale(1.02);
+    transform: translateY(-22.5%) translateZ(-0.5px) scale(2.5);
 }
 
 .gh-cover-content {
@@ -615,7 +641,8 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 
 .gh-cover-hero {
     align-items: flex-end;
-    --cover-height: 30vh;
+    --cover-height: 50vh;
+    transform-style: preserve-3d;
 }
 
 .gh-cover-hero .gh-cover-content {
@@ -943,6 +970,25 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     .has-wide-image .gh-article-excerpt {
         margin-top: 36px;
         font-size: 2.4rem;
+    }
+
+    .has-full-image .gh-article-sidebar,
+    .has-wide-image .gh-article-sidebar {
+        top: 36px;
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --var-container-width: 1000px;
+        --var-content-width: 800px;
+    }
+}
+
+@media (min-width: 1600px) {
+    :root {
+        --var-container-width: 1400px;
+        --var-content-width: 1000px;
     }
 }
 

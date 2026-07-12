@@ -46,7 +46,7 @@
     const image = cover.querySelector('.gh-cover-image');
 
     window.addEventListener('load', function () {
-        cover.style.setProperty('--cover-height', image.clientWidth * image.naturalHeight / image.naturalWidth + 'px');
+        //cover.style.setProperty('--cover-height', image.clientWidth * image.naturalHeight / image.naturalWidth + 'px');
         cover.classList.remove('loading');
     });
 })();
