@@ -9,8 +9,8 @@
     --h1-size: 4.4rem;
     --footer-spacing: 120px;
 
-    --var-container-width: 800px;
-    --var-content-width: 600px;
+    --container-width: 800px;
+    --content-width: 600px;
 }
 
 @media (max-width: 767px) {
@@ -609,7 +609,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
     position: sticky;
     bottom: 80px;
     align-items: flex-start;
-    max-width: var(--content-width, 1200px);
+    max-width: var(--content-width);
     margin-bottom: 64px;
     text-align: left;
 }
@@ -648,7 +648,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 
 .gh-cover-hero .gh-cover-content {
     align-items: flex-start;
-    max-width: var(--container-width, 1200px);
+    max-width: var(--container-width);
     text-align: left;
 }
 
@@ -981,15 +981,15 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 
 @media (min-width: 1200px) {
     :root {
-        --var-container-width: 1000px;
-        --var-content-width: 800px;
+        --container-width: 1000px;
+        --content-width: 800px;
     }
 }
 
 @media (min-width: 1600px) {
     :root {
-        --var-container-width: 1400px;
-        --var-content-width: 1000px;
+        --container-width: 1400px;
+        --content-width: 1000px;
     }
 }
 
@@ -1129,7 +1129,8 @@ pre.language-powershell::before {
 }
 
 .gh-card img,
-.kg-image {
+.kg-image,
+.kg-gallery-image img {
   border-radius: 5px;
   box-shadow: 2px 2px 15px rgba(0,0,0,0.5);
 }
