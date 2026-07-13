@@ -76,6 +76,12 @@ body {
 
 .gh-main {
     background-color: var(--color-white);
+    box-shadow: 0 0 60px rgba(0,0,0,0.8);
+}
+
+.gh-foot {
+    padding-bottom: 0;
+    margin-top: 0;
 }
 
 /* Fixing up quirks in the base Ghost theme */
@@ -757,8 +763,6 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 
 .gh-foot {
     padding-top: 80px;
-    padding-bottom: 120px;
-    margin-top: 120px;
     background-color: var(--color-darker-gray);
 }
 
