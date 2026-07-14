@@ -20,6 +20,13 @@ const cssnano = require('cssnano');
 // translations support
 const { mergeLocales } = require('@tryghost/theme-translations/build');
 const sharedThemeAssetsPath = path.dirname(require.resolve('@tryghost/shared-theme-assets/package.json'));
+const packageJson = require('./package.json');
+
+const vendorVersions = {
+    katex: packageJson.devDependencies.katex,
+    mermaid: packageJson.devDependencies.mermaid,
+    prism: packageJson.devDependencies.prismjs
+};
 
 function serve(done) {
     livereload.listen();
@@ -80,6 +87,50 @@ function js(done) {
     ], handleError(done));
 }
 
+function cleanVendor(done) {
+    fs.rmSync('assets/built/vendor', {recursive: true, force: true});
+    done();
+}
+
+function prism(done) {
+    pump([
+        src([
+            'node_modules/prismjs/LICENSE',
+            'node_modules/prismjs/components/prism-core.min.js',
+            'node_modules/prismjs/components/prism-*.min.js',
+            'node_modules/prismjs/plugins/autoloader/prism-autoloader.min.js'
+        ], {base: 'node_modules/prismjs', encoding: false}),
+        dest(`assets/built/vendor/prism/${vendorVersions.prism}/`)
+    ], handleError(done));
+}
+
+function mermaid(done) {
+    pump([
+        src([
+            'node_modules/mermaid/LICENSE',
+            'node_modules/mermaid/dist/mermaid.esm.min.mjs',
+            'node_modules/mermaid/dist/chunks/mermaid.esm.min/**/*.mjs'
+        ], {base: 'node_modules/mermaid', encoding: false}),
+        dest(`assets/built/vendor/mermaid/${vendorVersions.mermaid}/`)
+    ], handleError(done));
+}
+
+function katex(done) {
+    pump([
+        src([
+            'node_modules/katex/LICENSE',
+            'node_modules/katex/dist/katex.min.js',
+            'node_modules/katex/dist/katex-swap.min.css',
+            'node_modules/katex/dist/contrib/auto-render.min.js',
+            'node_modules/katex/dist/contrib/copy-tex.min.js',
+            'node_modules/katex/dist/fonts/*.woff2'
+        ], {base: 'node_modules/katex', encoding: false}),
+        dest(`assets/built/vendor/katex/${vendorVersions.katex}/`)
+    ], handleError(done));
+}
+
+const vendor = series(cleanVendor, parallel(prism, mermaid, katex));
+
 function zipper(done) {
     const filename = require('./package.json').name + '.zip';
 
@@ -89,6 +140,7 @@ function zipper(done) {
             '!node_modules', '!node_modules/**',
             '!dist', '!dist/**',
             '!pnpm-debug.log',
+            '!package-lock.json',
             '!pnpm-lock.yaml',
             '!pnpm-workspace.yaml',
             '!AGENTS.md',
@@ -111,7 +163,7 @@ const hbsWatcher = () => watch(['*.hbs', 'partials/**/*.hbs'], hbs);
 const cssWatcher = () => watch('assets/css/**/*.css', css);
 const jsWatcher = () => watch('assets/js/**/*.js', js);
 const watcher = parallel(hbsWatcher, cssWatcher, jsWatcher, localesWatcher);
-const build = series(css, js, locales);
+const build = parallel(css, js, locales, vendor);
 
 exports.build = build;
 exports.zip = series(build, zipper);

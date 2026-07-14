@@ -114,7 +114,17 @@
     {{> "pswp"}}
 {{/is}}
 
-<script src="{{asset "built/main.min.js"}}"></script>
+<script
+    src="{{asset "built/main.min.js"}}"
+    data-optional-renderers
+    data-prism-core="{{asset "built/vendor/prism/1.30.0/components/prism-core.min.js"}}"
+    data-prism-autoloader="{{asset "built/vendor/prism/1.30.0/plugins/autoloader/prism-autoloader.min.js"}}"
+    data-mermaid="{{asset "built/vendor/mermaid/11.16.0/dist/mermaid.esm.min.mjs"}}"
+    data-katex="{{asset "built/vendor/katex/0.17.0/dist/katex.min.js"}}"
+    data-katex-styles="{{asset "built/vendor/katex/0.17.0/dist/katex-swap.min.css"}}"
+    data-katex-auto-render="{{asset "built/vendor/katex/0.17.0/dist/contrib/auto-render.min.js"}}"
+    data-katex-copy="{{asset "built/vendor/katex/0.17.0/dist/contrib/copy-tex.min.js"}}"
+></script>
 
 {{ghost_foot}}
 
