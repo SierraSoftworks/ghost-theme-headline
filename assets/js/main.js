@@ -122,8 +122,8 @@
         window.Prism = {manual: true};
         await loadScript(assets.dataset.prismCore);
         await loadScript(assets.dataset.prismAutoloader);
-        const prismCoreUrl = new URL(assets.dataset.prismCore, document.baseURI);
-        window.Prism.plugins.autoloader.languages_path = new URL('.', prismCoreUrl).href;
+        const prismCorePath = assets.dataset.prismCore.split('?')[0];
+        window.Prism.plugins.autoloader.languages_path = prismCorePath.slice(0, prismCorePath.lastIndexOf('/') + 1);
         blocks.forEach(function (block) {
             window.Prism.highlightElement(block);
         });
