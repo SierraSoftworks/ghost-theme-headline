@@ -1,5 +1,6 @@
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "fonts.css";
+@import "prismjs/themes/prism-tomorrow.css";
 
 :root {
     --font-sans: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif; /* stylelint-disable-line value-keyword-case */
@@ -1118,6 +1119,52 @@ pre[class*="language-"] {
   box-shadow: 2px 2px 15px rgba(0,0,0,0.5);
   margin-top: calc(1.6em*var(--content-spacing-multiplier, 1));
   margin-bottom: 0;
+}
+
+.mermaid {
+  max-width: 100%;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.mermaid.is-loading {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  color: transparent;
+  background: var(--color-lighter-gray);
+}
+
+.mermaid.is-loading::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.65) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: mermaid-loading 1.4s ease-in-out infinite;
+}
+
+@keyframes mermaid-loading {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mermaid.is-loading::after {
+    animation: none;
+  }
 }
 
 /*

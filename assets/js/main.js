@@ -50,3 +50,164 @@
         cover.classList.remove('loading');
     });
 })();
+
+/* Optional content renderers are loaded only when the article needs them. */
+(function () {
+    const content = document.querySelector('.gh-content');
+    const assets = document.querySelector('script[data-optional-renderers]');
+    if (!content || !assets) return;
+
+    function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+
+    function loadStylesheet(href) {
+        return new Promise(function (resolve, reject) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            link.onload = resolve;
+            link.onerror = reject;
+            document.head.appendChild(link);
+        });
+    }
+
+    function hasMath() {
+        const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, {
+            acceptNode: function (node) {
+                return node.parentElement.closest('pre, code, script, style, textarea, .mermaid, .no-katex')
+                    ? NodeFilter.FILTER_REJECT
+                    : NodeFilter.FILTER_ACCEPT;
+            }
+        });
+
+        while (walker.nextNode()) {
+            const text = walker.currentNode.nodeValue;
+            if (/\\\([\s\S]+?\\\)|\\\[[\s\S]+?\\\]|\$\$[\s\S]+?\$\$|(^|[^\\$])\$(?!\$)(?:\\.|[^$\n])+?\$(?!\$)/.test(text)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function normalizeMathBlocks() {
+        content.querySelectorAll('p').forEach(function (paragraph) {
+            if (!paragraph.querySelector('br')) return;
+
+            const source = Array.from(paragraph.childNodes).map(function (node) {
+                return node.nodeName === 'BR' ? '\n' : node.textContent;
+            }).join('');
+
+            if (/^\s*\$\$[\s\S]+\$\$\s*$/.test(source)) {
+                paragraph.textContent = source;
+            }
+        });
+    }
+
+    async function highlightCode() {
+        const blocks = Array.from(content.querySelectorAll('pre > code[class*="language-"]'))
+            .filter(function (block) {
+                return !block.classList.contains('language-mermaid');
+            });
+        if (!blocks.length) return;
+
+        window.Prism = {manual: true};
+        await loadScript(assets.dataset.prismCore);
+        await loadScript(assets.dataset.prismAutoloader);
+        window.Prism.plugins.autoloader.languages_path = new URL('.', assets.dataset.prismCore).href;
+        blocks.forEach(function (block) {
+            window.Prism.highlightElement(block);
+        });
+    }
+
+    async function renderDiagrams() {
+        const sources = Array.from(content.querySelectorAll('code.language-mermaid, pre.mermaid'));
+        const originals = Array.from(new Set(sources.map(function (source) {
+            return source.matches('code') ? source.closest('pre') : source;
+        })));
+        if (!originals.length) return;
+
+        const diagrams = originals.map(function (original) {
+            const source = original.querySelector('code.language-mermaid') || original;
+            const diagram = document.createElement('div');
+            diagram.className = 'mermaid is-loading';
+            diagram.textContent = source.textContent;
+            diagram.style.minHeight = Math.max(120, original.offsetHeight) + 'px';
+            diagram.setAttribute('aria-busy', 'true');
+            diagram.setAttribute('aria-label', 'Rendering diagram');
+            original.replaceWith(diagram);
+            return {diagram: diagram, original: original};
+        });
+
+        try {
+            const module = await import(assets.dataset.mermaid);
+            const mermaid = module.default;
+            mermaid.initialize({startOnLoad: false, securityLevel: 'strict'});
+            await mermaid.run({nodes: diagrams.map(function (item) { return item.diagram; })});
+            diagrams.forEach(function (item) {
+                item.diagram.classList.remove('is-loading');
+                item.diagram.style.removeProperty('min-height');
+                item.diagram.removeAttribute('aria-busy');
+                item.diagram.removeAttribute('aria-label');
+            });
+        } catch (err) {
+            diagrams.forEach(function (item) {
+                item.diagram.replaceWith(item.original);
+            });
+            console.warn('Unable to render Mermaid diagrams:', err); // eslint-disable-line no-console
+        }
+    }
+
+    async function renderMath() {
+        normalizeMathBlocks();
+        if (!hasMath()) return;
+
+        await Promise.all([
+            loadStylesheet(assets.dataset.katexStyles),
+            loadScript(assets.dataset.katex)
+        ]);
+        await loadScript(assets.dataset.katexAutoRender);
+        window.renderMathInElement(content, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '$', right: '$', display: false}
+            ],
+            ignoredClasses: ['mermaid', 'no-katex'],
+            output: 'htmlAndMathml',
+            throwOnError: false,
+            strict: 'warn',
+            trust: false,
+            maxSize: 50,
+            maxExpand: 1000
+        });
+        await loadScript(assets.dataset.katexCopy);
+    }
+
+    function initializeRenderers() {
+        Promise.allSettled([
+            renderDiagrams(),
+            highlightCode(),
+            renderMath()
+        ]).then(function (results) {
+            results.forEach(function (result) {
+                if (result.status === 'rejected') {
+                    console.warn('Unable to initialize an optional content renderer:', result.reason); // eslint-disable-line no-console
+                }
+            });
+        });
+    }
+
+    requestAnimationFrame(function () {
+        requestAnimationFrame(initializeRenderers);
+    });
+})();
