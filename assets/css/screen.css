@@ -162,6 +162,7 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 
 .gh-topic-grid .gh-card.featured.large .gh-card-link {
     position: relative;
+    isolation: isolate;
     align-items: flex-end;
     min-height: 600px;
     padding: 48px 40px;
