@@ -1159,6 +1159,11 @@ pre[class*="language-"] {
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.katex-display::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
