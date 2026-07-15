@@ -828,6 +828,11 @@ body:not(.home-template) .gh-topic-grid .gh-card {
 /* Media queries */
 
 @media (max-width: 767px) {
+    .is-head-open #gh-head {
+        height: 100vh;
+        height: 100dvh;
+    }
+
     .gh-main {
         padding-top: 6.4rem;
         padding-bottom: 6.4rem;
