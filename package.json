@@ -116,7 +116,7 @@
         "gulp-uglify": "3.0.2",
         "gulp-zip": "5.1.0",
         "katex": "0.17.0",
-        "mermaid": "11.16.0",
+        "mermaid": "11.16.1",
         "ordered-read-streams": "2.0.0",
         "postcss": "8.5.15",
         "postcss-easy-import": "4.0.0",
