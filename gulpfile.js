@@ -20,13 +20,11 @@ const cssnano = require('cssnano');
 // translations support
 const { mergeLocales } = require('@tryghost/theme-translations/build');
 const sharedThemeAssetsPath = path.dirname(require.resolve('@tryghost/shared-theme-assets/package.json'));
-const packageJson = require('./package.json');
 
-const vendorVersions = {
-    katex: packageJson.devDependencies.katex,
-    mermaid: packageJson.devDependencies.mermaid,
-    prism: packageJson.devDependencies.prismjs
-};
+// Vendor libraries are copied to version-less paths (assets/built/vendor/<name>/)
+// so that default.hbs never has to track the versions in package.json. Cache
+// busting is handled by Ghost's {{asset}} helper, which appends a ?v= query that
+// changes whenever the theme is re-uploaded.
 
 function serve(done) {
     livereload.listen();
@@ -100,7 +98,7 @@ function prism(done) {
             'node_modules/prismjs/components/prism-*.min.js',
             'node_modules/prismjs/plugins/autoloader/prism-autoloader.min.js'
         ], {base: 'node_modules/prismjs', encoding: false}),
-        dest(`assets/built/vendor/prism/${vendorVersions.prism}/`)
+        dest('assets/built/vendor/prism/')
     ], handleError(done));
 }
 
@@ -111,7 +109,7 @@ function mermaid(done) {
             'node_modules/mermaid/dist/mermaid.esm.min.mjs',
             'node_modules/mermaid/dist/chunks/mermaid.esm.min/**/*.mjs'
         ], {base: 'node_modules/mermaid', encoding: false}),
-        dest(`assets/built/vendor/mermaid/${vendorVersions.mermaid}/`)
+        dest('assets/built/vendor/mermaid/')
     ], handleError(done));
 }
 
@@ -125,7 +123,7 @@ function katex(done) {
             'node_modules/katex/dist/contrib/copy-tex.min.js',
             'node_modules/katex/dist/fonts/*.woff2'
         ], {base: 'node_modules/katex', encoding: false}),
-        dest(`assets/built/vendor/katex/${vendorVersions.katex}/`)
+        dest('assets/built/vendor/katex/')
     ], handleError(done));
 }
 
